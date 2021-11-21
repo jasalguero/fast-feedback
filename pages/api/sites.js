@@ -8,6 +8,7 @@ const fetchUserSites = async (req, res) => {
 
     res.status(200).json({ sites });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error });
   }
 };
