@@ -3,21 +3,21 @@ import useSWR from "swr";
 
 import DashboardShell from "@/components/DashboardShell";
 import EmptyState from "@/components/sites/EmptyState";
-import SiteTable from "@/components/sites/SiteTable";
-import SiteTableHeader from "@/components/sites/SiteTableHeader";
+import FeedbackTable from "@/components/feedback/FeedbackTable";
+import FeedbackTableHeader from "@/components/feedback/FeedbackTableHeader";
 import SiteTableSkeleton from "@/components/sites/SiteTableSkeleton";
 import fetcher from "@/utils/fetcher";
 import { useAuth } from "@/lib/auth";
 
 const Dashboard = () => {
   const { user } = useAuth();
-  const { data } = useSWR(user ? ["/api/sites", user?.token] : null, fetcher);
-  const sites = data?.sites;
+  const { data } = useSWR(user ? ["/api/feedback", user?.token] : null, fetcher);
+  const feedbacks = data?.feedbacks;
 
   if (!data) {
     return (
       <DashboardShell>
-        <SiteTableHeader />
+        <FeedbackTableHeader />
         <SiteTableSkeleton />
       </DashboardShell>
     );
@@ -25,8 +25,8 @@ const Dashboard = () => {
 
   return (
     <DashboardShell>
-      <SiteTableHeader />
-      {sites.length ? <SiteTable sites={sites} /> : <EmptyState />}
+      <FeedbackTableHeader />
+      {feedbacks.length ? <FeedbackTable feedbacks={feedbacks} /> : <EmptyState />}
     </DashboardShell>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading, Stack, Text, Button } from "@chakra-ui/react";
-import AddSiteModal from "@/components/AddSiteModal";
+import AddSiteModal from "@/components/sites/AddSiteModal";
 
 const EmptyState = () => {
   return (

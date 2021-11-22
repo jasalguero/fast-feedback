@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { Box, Button, Flex, Link, Avatar, Icon } from "@chakra-ui/react";
 
 import { useAuth } from "@/lib/auth";
-import AddSiteModal from "@/components/AddSiteModal";
+import AddSiteModal from "@/components/sites/AddSiteModal";
 
 const DashboardShell = ({ children }) => {
   const { user } = useAuth();
