@@ -9,16 +9,29 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
+import { mutate } from "swr";
+import { DeleteIcon } from "@chakra-ui/icons";
 
+import { useAuth } from "@/lib/auth";
 import { deleteSite } from "@/lib/db";
 
 const DeleteSiteButton = ({ siteId }) => {
   const [isOpen, setIsOpen] = useState();
   const cancelRef = useRef();
+  const auth = useAuth();
 
   const onClose = () => setIsOpen(false);
   const onDelete = () => {
     deleteSite(siteId);
+    mutate(
+      ["/api/sites", auth.user.token],
+      async (data) => {
+        return {
+          sites: data.sites.filter((site) => site.id !== siteId),
+        };
+      },
+      false
+    );
     onClose();
   };
 
@@ -26,7 +39,7 @@ const DeleteSiteButton = ({ siteId }) => {
     <>
       <IconButton
         aria-label="Delete site"
-        icon="delete"
+        icon={<DeleteIcon />}
         variant="ghost"
         onClick={() => setIsOpen(true)}
       />
@@ -49,7 +62,7 @@ const DeleteSiteButton = ({ siteId }) => {
             </Button>
             <Button
               fontWeight="bold"
-              variantColor="red"
+              colorScheme="red"
               onClick={onDelete}
               ml={3}
             >

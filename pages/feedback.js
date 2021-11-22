@@ -2,7 +2,7 @@ import React from "react";
 import useSWR from "swr";
 
 import DashboardShell from "@/components/DashboardShell";
-import EmptyState from "@/components/sites/EmptyState";
+import EmptyState from "@/components/feedback/EmptyState";
 import FeedbackTable from "@/components/feedback/FeedbackTable";
 import FeedbackTableHeader from "@/components/feedback/FeedbackTableHeader";
 import SiteTableSkeleton from "@/components/sites/SiteTableSkeleton";

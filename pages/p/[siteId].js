@@ -71,10 +71,10 @@ const FeedbackPage = ({ initialFeedback }) => {
     <DashboardShell>
       <Box
         display="flex"
+        mx={4}
         flexDirection="column"
         width="full"
         maxWidth="700px"
-        margin="0 auto"
       >
         {auth.user && (
           <Box as="form" onSubmit={onSubmit}>

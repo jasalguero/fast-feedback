@@ -4,6 +4,7 @@ import { Box, Link } from "@chakra-ui/react";
 import { parseISO, format } from "date-fns";
 
 import { Table, Tr, Th, Td } from "@/components/Table";
+import DeleteSiteButton from "@/components/sites/DeleteSiteButton";
 
 const SiteTable = ({ sites }) => {
   return (
@@ -35,6 +36,9 @@ const SiteTable = ({ sites }) => {
                 </NextLink>
               </Td>
               <Td>{format(parseISO(site.createdAt), "PPpp")}</Td>
+              <Td>
+                <DeleteSiteButton siteId={site.id} />
+              </Td>
             </Box>
           ))}
         </tbody>

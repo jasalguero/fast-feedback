@@ -9,16 +9,29 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
+import { mutate } from "swr";
+import { DeleteIcon } from "@chakra-ui/icons";
 
+import { useAuth } from "@/lib/auth";
 import { deleteFeedback } from "@/lib/db";
 
 const DeleteFeedbackButton = ({ feedbackId }) => {
   const [isOpen, setIsOpen] = useState();
   const cancelRef = useRef();
+  const auth = useAuth();
 
   const onClose = () => setIsOpen(false);
   const onDelete = () => {
     deleteFeedback(feedbackId);
+    mutate(
+      ["/api/feedback", auth.user.token],
+      async (data) => {
+        return {
+          feedbacks: data.feedbacks.filter((item) => item.id !== feedbackId),
+        };
+      },
+      false
+    );
     onClose();
   };
 
@@ -26,7 +39,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
     <>
       <IconButton
         aria-label="Delete feedback"
-        icon="delete"
+        icon={<DeleteIcon />}
         variant="ghost"
         onClick={() => setIsOpen(true)}
       />
@@ -49,7 +62,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
             </Button>
             <Button
               fontWeight="bold"
-              variantColor="red"
+              colorScheme="red"
               onClick={onDelete}
               ml={3}
             >
