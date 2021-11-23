@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import 'iframe-resizer/js/iframeResizer.contentWindow';
 
 import Feedback from "@/components/feedback/Feedback";
 import { getAllFeedback, getAllSites } from "@/lib/db-admin";
